@@ -98,3 +98,15 @@ s2 := s1
 NOTE:- we will get panic error if we try to initialize a map using "var" keyword .
 
 10] const enums block needs "iota" for auto incrementing feature
+
+11] Range over slices copies the value into the loop variable:
+
+'''
+users := []User{{Name: "Alice"}, {Name: "Bob"}}
+for _, u := range users {
+    u.Name = "modified"  // modifies the copy, not the slice element
+}
+// users[0].Name is still "Alice"
+'''
+
+If you need to modify elements in place, range with index: users[i].Name = "modified", or use a slice of pointers []*User.
